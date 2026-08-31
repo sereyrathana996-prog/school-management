@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
+use App\Livewire\Auth\Login;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,3 +20,8 @@ Route::get('/register', Register::class)
 Route::get('/dashboard', function () {
     return 'Welcome to Dashboard!';
 })->middleware('auth')->name('dashboard');
+
+
+Route::get('/login', Login::class)
+    ->middleware('guest')
+    ->name('login');
