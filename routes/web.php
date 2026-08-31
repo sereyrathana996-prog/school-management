@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Login;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,12 +17,16 @@ Route::get('/register', Register::class)
     ->middleware('guest')
     ->name('register');
 
-
 Route::get('/dashboard', function () {
-    return 'Welcome to Dashboard!';
+    return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
 
 Route::get('/login', Login::class)
     ->middleware('guest')
     ->name('login');
+
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
