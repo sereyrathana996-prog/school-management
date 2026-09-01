@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<x-layouts.dashboard title="Student Dashboard">
 
-    <title>Student Dashboard</title>
-</head>
+    <h1 class="text-3xl font-bold text-gray-800">
+        Welcome, {{ auth()->user()->name }} 👋
+    </h1>
 
-<body>
-
-    <h1>Student Dashboard</h1>
-
-    <p>
-        Welcome,
-        <strong>{{ auth()->user()->name }}</strong>
+    <p class="text-gray-500 mt-2">
+        Welcome to your student dashboard.
     </p>
 
-    <p>
-        Role:
-        <strong>{{ auth()->user()->role }}</strong>
-    </p>
-
-    <hr>
-
-    <h2>Student Features</h2>
-
-    <ul>
-        <li>My Profile</li>
-        <li>My Timetable</li>
-        <li>My Attendance</li>
-        <li>My Results</li>
-    </ul>
-
-    <br>
-
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-
-        <button type="submit">
-            Logout
-        </button>
-    </form>
-
-</body>
-</html>
+</x-layouts.dashboard>

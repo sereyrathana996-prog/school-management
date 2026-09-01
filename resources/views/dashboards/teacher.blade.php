@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<x-layouts.dashboard title="Teacher Dashboard">
 
-    <title>Teacher Dashboard</title>
-</head>
+    <h1 class="text-3xl font-bold text-gray-800">
+        Welcome, {{ auth()->user()->name }} 👋
+    </h1>
 
-<body>
-
-    <h1>Teacher Dashboard</h1>
-
-    <p>
-        Welcome,
-        <strong>{{ auth()->user()->name }}</strong>
+    <p class="text-gray-500 mt-2">
+        Welcome to your teacher dashboard.
     </p>
 
-    <p>
-        Role:
-        <strong>{{ auth()->user()->role }}</strong>
-    </p>
-
-    <hr>
-
-    <h2>Teacher Features</h2>
-
-    <ul>
-        <li>My Classes</li>
-        <li>Student Attendance</li>
-        <li>Exam Results</li>
-        <li>My Timetable</li>
-    </ul>
-
-    <br>
-
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-
-        <button type="submit">
-            Logout
-        </button>
-    </form>
-
-</body>
-</html>
+</x-layouts.dashboard>

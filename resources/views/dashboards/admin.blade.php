@@ -1,48 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<x-layouts.dashboard title="Admin Dashboard">
 
-    <title>Admin Dashboard - School Management System</title>
-</head>
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">
+            Welcome, {{ auth()->user()->name }} 👋
+        </h1>
 
-<body>
+        <p class="text-gray-500 mt-2">
+            Here's what's happening in your school today.
+        </p>
+    </div>
 
-    <h1>Admin Dashboard</h1>
 
-    <p>
-        Welcome,
-        <strong>{{ auth()->user()->name }}</strong>
-    </p>
+    {{-- Statistics Cards --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-    <p>
-        Role:
-        <strong>{{ auth()->user()->role }}</strong>
-    </p>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <p class="text-gray-500">Total Students</p>
 
-    <hr>
+            <h3 class="text-3xl font-bold mt-2">
+                0
+            </h3>
+        </div>
 
-    <h2>School Management System</h2>
 
-    <ul>
-        <li>Manage Students</li>
-        <li>Manage Teachers</li>
-        <li>Manage Classes</li>
-        <li>Manage Subjects</li>
-        <li>Manage Attendance</li>
-        <li>Manage Exams</li>
-    </ul>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <p class="text-gray-500">Total Teachers</p>
 
-    <br>
+            <h3 class="text-3xl font-bold mt-2">
+                0
+            </h3>
+        </div>
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
 
-        <button type="submit">
-            Logout
-        </button>
-    </form>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <p class="text-gray-500">Total Classes</p>
 
-</body>
-</html>
+            <h3 class="text-3xl font-bold mt-2">
+                0
+            </h3>
+        </div>
+
+
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+            <p class="text-gray-500">Total Subjects</p>
+
+            <h3 class="text-3xl font-bold mt-2">
+                0
+            </h3>
+        </div>
+
+    </div>
+
+
+    {{-- Quick Actions --}}
+    <div class="mt-8 bg-white rounded-xl shadow-sm p-6">
+
+        <h2 class="text-xl font-bold text-gray-800">
+            Quick Actions
+        </h2>
+
+        <div class="mt-4 flex flex-wrap gap-4">
+
+            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg">
+                Add Student
+            </button>
+
+            <button class="px-4 py-2 bg-green-600 text-white rounded-lg">
+                Add Teacher
+            </button>
+
+            <button class="px-4 py-2 bg-purple-600 text-white rounded-lg">
+                Create Class
+            </button>
+
+        </div>
+
+    </div>
+
+</x-layouts.dashboard>
