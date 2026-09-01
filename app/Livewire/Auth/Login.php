@@ -25,7 +25,15 @@ class Login extends Component
 
         session()->regenerate();
 
-        return $this->redirect('/dashboard', navigate: true);
+        $user = Auth::user();
+
+        return match ($user->role) {
+            'admin' => $this->redirect('/admin/dashboard', navigate: true),
+            'teacher' => $this->redirect('/teacher/dashboard', navigate: true),
+            'student' => $this->redirect('/student/dashboard', navigate: true),
+            'parent' => $this->redirect('/parent/dashboard', navigate: true),
+            default => $this->redirect('/dashboard', navigate: true),
+        };
     }
 
     public function render()

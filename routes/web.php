@@ -30,3 +30,27 @@ Route::get('/login', Login::class)
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+
+Route::get('/admin/dashboard', function () {
+    return 'Welcome Admin Dashboard!';
+})->middleware(['auth', 'role:admin'])
+  ->name('admin.dashboard');
+
+
+Route::get('/teacher/dashboard', function () {
+    return 'Welcome Teacher Dashboard!';
+})->middleware(['auth', 'role:teacher'])
+  ->name('teacher.dashboard');
+
+
+Route::get('/student/dashboard', function () {
+    return 'Welcome Student Dashboard!';
+})->middleware(['auth', 'role:student'])
+  ->name('student.dashboard');
+
+
+Route::get('/parent/dashboard', function () {
+    return 'Welcome Parent Dashboard!';
+})->middleware(['auth', 'role:parent'])
+  ->name('parent.dashboard');
