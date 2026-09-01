@@ -33,24 +33,22 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 
 
 Route::get('/admin/dashboard', function () {
-    return 'Welcome Admin Dashboard!';
+    return view('dashboards.admin');
 })->middleware(['auth', 'role:admin'])
   ->name('admin.dashboard');
 
-
 Route::get('/teacher/dashboard', function () {
-    return 'Welcome Teacher Dashboard!';
+    return view('dashboards.teacher');
 })->middleware(['auth', 'role:teacher'])
   ->name('teacher.dashboard');
 
-
 Route::get('/student/dashboard', function () {
-    return 'Welcome Student Dashboard!';
+    return view('dashboards.student');
 })->middleware(['auth', 'role:student'])
   ->name('student.dashboard');
 
 
 Route::get('/parent/dashboard', function () {
-    return 'Welcome Parent Dashboard!';
+    return view('dashboards.parent');
 })->middleware(['auth', 'role:parent'])
   ->name('parent.dashboard');
