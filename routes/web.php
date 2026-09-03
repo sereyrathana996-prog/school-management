@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Login;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Livewire\Students\Index as StudentsIndex;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +14,12 @@ Route::get('/admin-test', function () {
     return 'Welcome Admin!';
 })->middleware(['auth', 'role:admin']);
 
+
+Route::get('/admin/students', StudentsIndex::class)
+    ->middleware(['auth', 'role:admin'])
+    ->name('students.index');
+
+    
 Route::get('/register', Register::class)
     ->middleware('guest')
     ->name('register');

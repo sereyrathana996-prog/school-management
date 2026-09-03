@@ -38,7 +38,10 @@
 
                 @if(auth()->user()->role === 'admin')
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a
+                        href="{{ route('students.index') }}"
+                        class="block px-4 py-3 rounded-lg hover:bg-slate-800"
+                    >
                         👨‍🎓 Students
                     </a>
 
