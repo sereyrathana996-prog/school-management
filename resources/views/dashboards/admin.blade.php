@@ -61,9 +61,12 @@
 
         <div class="mt-4 flex flex-wrap gap-4">
 
-            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg">
+            <a
+                href="{{ route('students.create') }}"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg"
+            >
                 Add Student
-            </button>
+            </a>
 
             <button class="px-4 py-2 bg-green-600 text-white rounded-lg">
                 Add Teacher

@@ -6,6 +6,8 @@ use App\Livewire\Auth\Login;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Livewire\Students\Index as StudentsIndex;
 use App\Livewire\Students\Create as StudentsCreate;
+use App\Livewire\Students\Edit as StudentsEdit;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,14 +17,20 @@ Route::get('/admin-test', function () {
     return 'Welcome Admin!';
 })->middleware(['auth', 'role:admin']);
 
-
+//index
 Route::get('/admin/students', StudentsIndex::class)
     ->middleware(['auth', 'role:admin'])
     ->name('students.index');
 
+//create
 Route::get('/admin/students/create', StudentsCreate::class)
     ->middleware(['auth', 'role:admin'])
     ->name('students.create');
+
+//edit
+Route::get('/admin/students/{student}/edit', StudentsEdit::class)
+    ->middleware(['auth', 'role:admin'])
+    ->name('students.edit');
 
 
 Route::get('/register', Register::class)

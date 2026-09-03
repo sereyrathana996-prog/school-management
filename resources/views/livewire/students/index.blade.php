@@ -79,9 +79,12 @@
 
                             <td class="px-6 py-4">
 
-                                <button class="text-blue-600">
+                                <a
+                                    href="{{ route('students.edit', $student) }}"
+                                    class="text-blue-600 hover:underline"
+                                >
                                     Edit
-                                </button>
+                                </a>
 
                                 <button class="text-red-600 ml-3">
                                     Delete
