@@ -7,6 +7,8 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Students\Index as StudentIndex;
 use App\Livewire\Students\Create as StudentCreate;
 use App\Livewire\Students\Edit as StudentEdit;
+use App\Livewire\Students\Show as StudentsShow;
+
 
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
@@ -64,6 +66,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/students', StudentIndex::class)->name('students.index');
         Route::get('/students/create', StudentCreate::class)->name('students.create');
         Route::get('/students/{student}/edit', StudentEdit::class)->name('students.edit');
+        // Route::get('/students/{student}', StudentsShow::class)->name('students.show');
+
+        Route::get('/students/{student}', StudentsShow::class)
+        ->name('students.show');
+
+
     });
 
     // Teacher Dashboard

@@ -63,6 +63,12 @@
                             </td>
                             <td class="px-6 py-4 font-medium">
                                 <a
+                                    href="{{ route('students.show', $student) }}"
+                                    class="text-green-600 hover:underline mr-3"
+                                >
+                                    View
+                                </a>
+                                <a
                                     href="{{ route('students.edit', $student) }}"
                                     class="text-blue-600 hover:text-blue-800 mr-3"
                                 >
