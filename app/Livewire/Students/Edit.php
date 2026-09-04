@@ -1,22 +1,21 @@
 <?php
 
 namespace App\Livewire\Students;
-use App\Models\Student;
 
+use App\Models\Student;
 use Livewire\Component;
 
 class Edit extends Component
 {
     public Student $student;
 
-     public string $student_id = '';
+    public string $student_id = '';
     public string $first_name = '';
     public string $last_name = '';
     public string $gender = '';
     public ?string $date_of_birth = null;
     public ?string $phone = null;
     public ?string $address = null;
-
 
     public function mount(Student $student)
     {
@@ -30,7 +29,6 @@ class Edit extends Component
         $this->phone = $student->phone;
         $this->address = $student->address;
     }
-
 
     protected function rules(): array
     {
@@ -50,7 +48,6 @@ class Edit extends Component
         ];
     }
 
-
     public function update()
     {
         $validated = $this->validate();
@@ -65,6 +62,6 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.students.edit')
-            ->layout('layouts.app');
+            ->layout('components.layouts.dashboard', ['title' => 'Edit Student']);
     }
 }

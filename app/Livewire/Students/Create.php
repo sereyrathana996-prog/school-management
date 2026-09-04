@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Livewire\Students;
+
 use App\Models\Student;
 use Livewire\Component;
 
 class Create extends Component
 {
-
     public string $student_id = '';
     public string $first_name = '';
     public string $last_name = '';
@@ -42,6 +42,6 @@ class Create extends Component
     public function render()
     {
         return view('livewire.students.create')
-            ->layout('layouts.app');
+            ->layout('components.layouts.dashboard', ['title' => 'Add New Student']);
     }
 }

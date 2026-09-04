@@ -18,7 +18,7 @@
 
             <div class="p-6 border-b border-slate-700">
                 <h1 class="text-xl font-bold">
-                    🏫 School MS
+                    🏫 EduManage
                 </h1>
 
                 <p class="text-sm text-gray-400 mt-1">
@@ -27,11 +27,11 @@
             </div>
 
             {{-- Navigation --}}
-            <nav class="p-4">
+            <nav class="p-4 space-y-1">
 
                 <a
-                    href="{{ route(auth()->user()->role . '.dashboard') }}"
-                    class="block px-4 py-3 rounded-lg hover:bg-slate-800"
+                    href="{{ Route::has(auth()->user()->role . '.dashboard') ? route(auth()->user()->role . '.dashboard') : url('/dashboard') }}"
+                    class="block px-4 py-3 rounded-lg hover:bg-slate-800 font-medium"
                 >
                     📊 Dashboard
                 </a>
@@ -39,71 +39,71 @@
                 @if(auth()->user()->role === 'admin')
 
                     <a
-                        href="{{ route('students.index') }}"
-                        class="block px-4 py-3 rounded-lg hover:bg-slate-800"
+                        href="{{ Route::has('students.index') ? route('students.index') : '#' }}"
+                        class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white"
                     >
                         👨‍🎓 Students
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         👨‍🏫 Teachers
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         🏫 Classes
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📚 Subjects
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📅 Attendance
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📝 Exams
                     </a>
 
                 @elseif(auth()->user()->role === 'teacher')
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         👨‍🏫 My Classes
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📅 Attendance
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📝 Results
                     </a>
 
                 @elseif(auth()->user()->role === 'student')
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         👤 My Profile
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📅 My Attendance
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📝 My Results
                     </a>
 
                 @elseif(auth()->user()->role === 'parent')
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         👨‍👩‍👧 My Children
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📅 Attendance
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800">
+                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
                         📝 Results
                     </a>
 
@@ -112,7 +112,6 @@
             </nav>
 
         </aside>
-
 
         {{-- Main Content --}}
         <div class="flex-1">
@@ -125,7 +124,6 @@
                     <h2 class="text-lg font-semibold text-gray-800">
                         {{ $title ?? 'Dashboard' }}
                     </h2>
-
 
                     <div class="flex items-center gap-4">
 
@@ -141,14 +139,13 @@
 
                         </div>
 
-
                         <form method="POST" action="{{ route('logout') }}">
 
                             @csrf
 
                             <button
                                 type="submit"
-                                class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                                class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm font-medium transition-colors"
                             >
                                 Logout
                             </button>
@@ -160,7 +157,6 @@
                 </div>
 
             </header>
-
 
             {{-- Page Content --}}
             <main class="p-8">

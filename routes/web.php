@@ -1,74 +1,83 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Auth\Register;
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\Auth\Login;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Livewire\Students\Index as StudentsIndex;
-use App\Livewire\Students\Create as StudentsCreate;
-use App\Livewire\Students\Edit as StudentsEdit;
-
+use App\Livewire\Auth\Register;
+use App\Livewire\Students\Index as StudentIndex;
+use App\Livewire\Students\Create as StudentCreate;
+use App\Livewire\Students\Edit as StudentEdit;
 
 Route::get('/', function () {
+    $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
+    $destDir = public_path('images');
+    if (!file_exists($destDir)) {
+        @mkdir($destDir, 0777, true);
+    }
+    if (file_exists($src) && !file_exists(public_path('images/hero_students.jpg'))) {
+        @copy($src, public_path('images/hero_students.jpg'));
+    }
     return view('welcome');
 });
-
-Route::get('/admin-test', function () {
-    return 'Welcome Admin!';
-})->middleware(['auth', 'role:admin']);
-
-//index
-Route::get('/admin/students', StudentsIndex::class)
-    ->middleware(['auth', 'role:admin'])
-    ->name('students.index');
-
-//create
-Route::get('/admin/students/create', StudentsCreate::class)
-    ->middleware(['auth', 'role:admin'])
-    ->name('students.create');
-
-//edit
-Route::get('/admin/students/{student}/edit', StudentsEdit::class)
-    ->middleware(['auth', 'role:admin'])
-    ->name('students.edit');
-
-
-Route::get('/register', Register::class)
-    ->middleware('guest')
-    ->name('register');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
-
 
 Route::get('/login', Login::class)
     ->middleware('guest')
     ->name('login');
 
+Route::get('/register', Register::class)
+    ->middleware('guest')
+    ->name('register');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
+Route::post('/logout', function () {
+    Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
 
+Route::get('/admin-test', function () {
+    return 'Welcome Admin!';
+})->middleware(['auth', 'role:admin']);
 
-Route::get('/admin/dashboard', function () {
-    return view('dashboards.admin');
-})->middleware(['auth', 'role:admin'])
-  ->name('admin.dashboard');
+// Role-based Dashboards & Management Routes
+Route::middleware('auth')->group(function () {
 
-Route::get('/teacher/dashboard', function () {
-    return view('dashboards.teacher');
-})->middleware(['auth', 'role:teacher'])
-  ->name('teacher.dashboard');
+    // Central dashboard router
+    Route::get('/dashboard', function () {
+        $role = Auth::user()->role;
+        return match ($role) {
+            'admin' => redirect()->route('admin.dashboard'),
+            'teacher' => redirect()->route('teacher.dashboard'),
+            'student' => redirect()->route('student.dashboard'),
+            'parent' => redirect()->route('parent.dashboard'),
+            default => redirect()->route('admin.dashboard'),
+        };
+    })->name('dashboard');
 
-Route::get('/student/dashboard', function () {
-    return view('dashboards.student');
-})->middleware(['auth', 'role:student'])
-  ->name('student.dashboard');
+    // Admin Routes
+    Route::middleware('role:admin')->prefix('admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dashboards.admin');
+        })->name('admin.dashboard');
 
+        // Student Management Routes
+        Route::get('/students', StudentIndex::class)->name('students.index');
+        Route::get('/students/create', StudentCreate::class)->name('students.create');
+        Route::get('/students/{student}/edit', StudentEdit::class)->name('students.edit');
+    });
 
-Route::get('/parent/dashboard', function () {
-    return view('dashboards.parent');
-})->middleware(['auth', 'role:parent'])
-  ->name('parent.dashboard');
+    // Teacher Dashboard
+    Route::get('/teacher/dashboard', function () {
+        return view('dashboards.teacher');
+    })->middleware('role:teacher')->name('teacher.dashboard');
+
+    // Student Dashboard
+    Route::get('/student/dashboard', function () {
+        return view('dashboards.student');
+    })->middleware('role:student')->name('student.dashboard');
+
+    // Parent Dashboard
+    Route::get('/parent/dashboard', function () {
+        return view('dashboards.parent');
+    })->middleware('role:parent')->name('parent.dashboard');
+});
