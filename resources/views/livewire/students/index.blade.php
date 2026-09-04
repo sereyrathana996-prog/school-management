@@ -22,6 +22,16 @@
 
         </div>
 
+        @if (session()->has('success'))
+
+            <div class="mb-6 rounded-lg bg-green-100 px-4 py-3 text-green-700">
+
+                {{ session('success') }}
+
+            </div>
+
+        @endif
+
 
         <div class="bg-white rounded-xl shadow-sm overflow-hidden">
 
@@ -86,7 +96,11 @@
                                     Edit
                                 </a>
 
-                                <button class="text-red-600 ml-3">
+                               <button
+                                    wire:click="delete({{ $student->id }})"
+                                    wire:confirm="Are you sure you want to delete this student?"
+                                    class="text-red-600 ml-3 hover:underline"
+                                >
                                     Delete
                                 </button>
 
