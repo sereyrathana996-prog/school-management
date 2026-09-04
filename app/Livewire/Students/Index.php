@@ -4,9 +4,13 @@ namespace App\Livewire\Students;
 
 use App\Models\Student;
 use Livewire\Component;
+use Livewire\WithPagination;
+
 
 class Index extends Component
 {
+    use WithPagination;
+
     public string $search = '';
 
     public function delete($studentId)
@@ -32,7 +36,7 @@ class Index extends Component
                 });
             })
             ->latest()
-            ->get();
+            ->paginate(5);
 
         return view('livewire.students.index', [
             'students' => $students,

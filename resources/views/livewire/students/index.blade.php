@@ -88,5 +88,9 @@
             </table>
         </div>
 
+        <div class="mt-6">
+            {{ $students->links() }}
+        </div>
+
     </div>
 </div>
