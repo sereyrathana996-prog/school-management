@@ -1,5 +1,20 @@
 <div>
     <div class="max-w-7xl mx-auto">
+            <div class="mb-6">
+
+        <div class="bg-white rounded-xl shadow-sm p-5 w-full md:w-64">
+
+            <p class="text-sm text-gray-500">
+                Total Students
+            </p>
+
+            <p class="text-3xl font-bold text-gray-800 mt-1">
+                {{ $totalStudents }}
+            </p>
+
+        </div>
+
+    </div>
 
         <div class="flex items-center justify-between mb-6">
             <div>

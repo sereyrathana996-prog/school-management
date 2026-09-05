@@ -26,6 +26,8 @@ class Index extends Component
   
     public function render()
     {
+        $totalStudents = Student::count();
+
         $students = Student::query()
             ->when($this->search, function ($query) {
                 $query->where(function ($query) {
@@ -40,6 +42,7 @@ class Index extends Component
 
         return view('livewire.students.index', [
             'students' => $students,
-        ])->layout('components.layouts.dashboard', ['title' => 'Student Management']);
+            'totalStudents' => $totalStudents,
+        ])->layout('layouts.dashboard');
     }
 }
