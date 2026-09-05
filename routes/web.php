@@ -9,6 +9,10 @@ use App\Livewire\Students\Create as StudentCreate;
 use App\Livewire\Students\Edit as StudentEdit;
 use App\Livewire\Students\Show as StudentsShow;
 
+use App\Livewire\Admin\Dashboard as AdminDashboard;
+use App\Livewire\Teacher\Dashboard as TeacherDashboard;
+use App\Livewire\Students\Dashboard as StudentDashboard;
+use App\Livewire\Parents\Dashboard as ParentDashboard;
 
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
@@ -58,34 +62,27 @@ Route::middleware('auth')->group(function () {
 
     // Admin Routes
     Route::middleware('role:admin')->prefix('admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('dashboards.admin');
-        })->name('admin.dashboard');
+        Route::get('/dashboard', AdminDashboard::class)->name('admin.dashboard');
 
         // Student Management Routes
         Route::get('/students', StudentIndex::class)->name('students.index');
         Route::get('/students/create', StudentCreate::class)->name('students.create');
         Route::get('/students/{student}/edit', StudentEdit::class)->name('students.edit');
-        // Route::get('/students/{student}', StudentsShow::class)->name('students.show');
-
-        Route::get('/students/{student}', StudentsShow::class)
-        ->name('students.show');
-
-
+        Route::get('/students/{student}', StudentsShow::class)->name('students.show');
     });
 
     // Teacher Dashboard
-    Route::get('/teacher/dashboard', function () {
-        return view('dashboards.teacher');
-    })->middleware('role:teacher')->name('teacher.dashboard');
+    Route::get('/teacher/dashboard', TeacherDashboard::class)
+        ->middleware('role:teacher')
+        ->name('teacher.dashboard');
 
     // Student Dashboard
-    Route::get('/student/dashboard', function () {
-        return view('dashboards.student');
-    })->middleware('role:student')->name('student.dashboard');
+    Route::get('/student/dashboard', StudentDashboard::class)
+        ->middleware('role:student')
+        ->name('student.dashboard');
 
     // Parent Dashboard
-    Route::get('/parent/dashboard', function () {
-        return view('dashboards.parent');
-    })->middleware('role:parent')->name('parent.dashboard');
+    Route::get('/parent/dashboard', ParentDashboard::class)
+        ->middleware('role:parent')
+        ->name('parent.dashboard');
 });
