@@ -14,6 +14,9 @@ use App\Livewire\Teacher\Dashboard as TeacherDashboard;
 use App\Livewire\Students\Dashboard as StudentDashboard;
 use App\Livewire\Parents\Dashboard as ParentDashboard;
 
+use App\Livewire\Teachers\Index as TeacherIndex;
+
+
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
     $destDir = public_path('images');
@@ -85,4 +88,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/parent/dashboard', ParentDashboard::class)
         ->middleware('role:parent')
         ->name('parent.dashboard');
+
+Route::middleware('role:admin')->prefix('admin')->group(function () {
+
+    Route::get('/dashboard', AdminDashboard::class)
+        ->name('admin.dashboard');
+
+    Route::get('/students', StudentIndex::class)
+        ->name('students.index');
+
+    Route::get('/teachers', TeacherIndex::class)
+        ->name('teachers.index');
+    });
 });
