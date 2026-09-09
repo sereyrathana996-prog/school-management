@@ -17,6 +17,14 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function delete($id)
+    {
+        $teacher = Teacher::findOrFail($id);
+        $teacher->delete();
+
+        session()->flash('success', 'Teacher deleted successfully.');
+    }
+
     public function render()
     {
         $teachers = Teacher::query()
@@ -34,6 +42,6 @@ class Index extends Component
 
         return view('livewire.teachers.index', [
             'teachers' => $teachers,
-        ])->layout('layouts.dashboard');
+        ])->layout('components.layouts.dashboard', ['title' => 'Teachers']);
     }
 }

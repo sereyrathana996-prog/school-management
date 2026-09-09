@@ -10,12 +10,14 @@ use App\Livewire\Students\Edit as StudentEdit;
 use App\Livewire\Students\Show as StudentsShow;
 
 use App\Livewire\Admin\Dashboard as AdminDashboard;
-use App\Livewire\Teacher\Dashboard as TeacherDashboard;
+use App\Livewire\Teachers\Dashboard as TeacherDashboard;
 use App\Livewire\Students\Dashboard as StudentDashboard;
 use App\Livewire\Parents\Dashboard as ParentDashboard;
 
 use App\Livewire\Teachers\Index as TeacherIndex;
-
+use App\Livewire\Teachers\Create as TeacherCreate;
+use App\Livewire\Teachers\Edit as TeacherEdit;
+use App\Livewire\Teachers\Show as TeacherShow;
 
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
@@ -72,6 +74,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/students/create', StudentCreate::class)->name('students.create');
         Route::get('/students/{student}/edit', StudentEdit::class)->name('students.edit');
         Route::get('/students/{student}', StudentsShow::class)->name('students.show');
+
+        // Teacher Management Routes
+        Route::get('/teachers', TeacherIndex::class)->name('teachers.index');
+        Route::get('/teachers/create', TeacherCreate::class)->name('teachers.create');
+        Route::get('/teachers/{teacher}', TeacherShow::class)->name('teachers.show');
+        Route::get('/teachers/{teacher}/edit', TeacherEdit::class)->name('teachers.edit');
     });
 
     // Teacher Dashboard
@@ -88,16 +96,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/parent/dashboard', ParentDashboard::class)
         ->middleware('role:parent')
         ->name('parent.dashboard');
-
-Route::middleware('role:admin')->prefix('admin')->group(function () {
-
-    Route::get('/dashboard', AdminDashboard::class)
-        ->name('admin.dashboard');
-
-    Route::get('/students', StudentIndex::class)
-        ->name('students.index');
-
-    Route::get('/teachers', TeacherIndex::class)
-        ->name('teachers.index');
-    });
 });

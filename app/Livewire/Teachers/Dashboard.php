@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Teacher;
+namespace App\Livewire\Teachers;
 
 use Livewire\Component;
 
@@ -8,7 +8,7 @@ class Dashboard extends Component
 {
     public function render()
     {
-        return view('livewire.teacher.dashboard')
+        return view('livewire.teachers.dashboard')
             ->layout('components.layouts.dashboard', ['title' => 'Teacher Dashboard']);
     }
 }
