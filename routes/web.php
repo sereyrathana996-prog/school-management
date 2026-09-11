@@ -19,6 +19,11 @@ use App\Livewire\Teachers\Create as TeacherCreate;
 use App\Livewire\Teachers\Edit as TeacherEdit;
 use App\Livewire\Teachers\Show as TeacherShow;
 
+use App\Livewire\Classes\Index as ClassIndex;
+use App\Livewire\Classes\Create as ClassCreate;
+use App\Livewire\Classes\Edit as ClassEdit;
+use App\Livewire\Classes\Show as ClassShow;
+
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
     $destDir = public_path('images');
@@ -80,6 +85,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/teachers/create', TeacherCreate::class)->name('teachers.create');
         Route::get('/teachers/{teacher}', TeacherShow::class)->name('teachers.show');
         Route::get('/teachers/{teacher}/edit', TeacherEdit::class)->name('teachers.edit');
+
+        // Class Management Routes
+        Route::get('/classes', ClassIndex::class)->name('classes.index');
+        Route::get('/classes/create', ClassCreate::class)->name('classes.create');
+        Route::get('/classes/{schoolClass}', ClassShow::class)->name('classes.show');
+        Route::get('/classes/{schoolClass}/edit', ClassEdit::class)->name('classes.edit');
     });
 
     // Teacher Dashboard
