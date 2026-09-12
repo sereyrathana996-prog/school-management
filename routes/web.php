@@ -6,6 +6,21 @@ use App\Livewire\Auth\Login;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
+<<<<<<< Updated upstream
+=======
+    $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
+    $loginSrc = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/login_illustration_books_1789141835354.jpg';
+    $destDir = public_path('images');
+    if (!file_exists($destDir)) {
+        @mkdir($destDir, 0777, true);
+    }
+    if (file_exists($src) && !file_exists(public_path('images/hero_students.jpg'))) {
+        @copy($src, public_path('images/hero_students.jpg'));
+    }
+    if (file_exists($loginSrc) && !file_exists(public_path('images/login_illustration.jpg'))) {
+        @copy($loginSrc, public_path('images/login_illustration.jpg'));
+    }
+>>>>>>> Stashed changes
     return view('welcome');
 });
 

@@ -9,6 +9,7 @@ class Login extends Component
 {
     public string $email = '';
     public string $password = '';
+    public bool $remember = false;
 
     public function login()
     {
@@ -17,7 +18,7 @@ class Login extends Component
             'password' => ['required'],
         ]);
 
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt($credentials, $this->remember)) {
             $this->addError('email', 'The provided credentials are incorrect.');
 
             return;
