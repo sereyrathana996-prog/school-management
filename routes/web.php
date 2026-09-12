@@ -24,6 +24,11 @@ use App\Livewire\Classes\Create as ClassCreate;
 use App\Livewire\Classes\Edit as ClassEdit;
 use App\Livewire\Classes\Show as ClassShow;
 
+use App\Livewire\Subjects\Index as SubjectIndex;
+use App\Livewire\Subjects\Create as SubjectCreate;
+use App\Livewire\Subjects\Edit as SubjectEdit;
+use App\Livewire\Subjects\Show as SubjectShow;
+
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
     $destDir = public_path('images');
@@ -91,6 +96,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/classes/create', ClassCreate::class)->name('classes.create');
         Route::get('/classes/{schoolClass}', ClassShow::class)->name('classes.show');
         Route::get('/classes/{schoolClass}/edit', ClassEdit::class)->name('classes.edit');
+
+        // Subject Management Routes
+        Route::get('/subjects', SubjectIndex::class)->name('subjects.index');
+        Route::get('/subjects/create', SubjectCreate::class)->name('subjects.create');
+        Route::get('/subjects/{subject}', SubjectShow::class)->name('subjects.show');
+        Route::get('/subjects/{subject}/edit', SubjectEdit::class)->name('subjects.edit');
     });
 
     // Teacher Dashboard
