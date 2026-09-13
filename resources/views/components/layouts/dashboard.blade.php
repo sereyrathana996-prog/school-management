@@ -66,7 +66,10 @@
                         📚 Subjects
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
+                    <a
+                        href="{{ Route::has('attendance.index') ? route('attendance.index') : '#' }}"
+                        class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white"
+                    >
                         📅 Attendance
                     </a>
 

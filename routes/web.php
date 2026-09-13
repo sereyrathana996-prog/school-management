@@ -29,6 +29,11 @@ use App\Livewire\Subjects\Create as SubjectCreate;
 use App\Livewire\Subjects\Edit as SubjectEdit;
 use App\Livewire\Subjects\Show as SubjectShow;
 
+use App\Livewire\Attendance\Index as AttendanceIndex;
+use App\Livewire\Attendance\Create as AttendanceCreate;
+use App\Livewire\Attendance\Edit as AttendanceEdit;
+use App\Livewire\Attendance\Show as AttendanceShow;
+
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
     $destDir = public_path('images');
@@ -102,6 +107,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/subjects/create', SubjectCreate::class)->name('subjects.create');
         Route::get('/subjects/{subject}', SubjectShow::class)->name('subjects.show');
         Route::get('/subjects/{subject}/edit', SubjectEdit::class)->name('subjects.edit');
+
+        // Attendance Management Routes
+        Route::get('/attendance', AttendanceIndex::class)->name('attendance.index');
+        Route::get('/attendance/create', AttendanceCreate::class)->name('attendance.create');
+        Route::get('/attendance/{attendance}', AttendanceShow::class)->name('attendance.show');
+        Route::get('/attendance/{attendance}/edit', AttendanceEdit::class)->name('attendance.edit');
     });
 
     // Teacher Dashboard
