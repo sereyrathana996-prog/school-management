@@ -34,6 +34,11 @@ use App\Livewire\Attendance\Create as AttendanceCreate;
 use App\Livewire\Attendance\Edit as AttendanceEdit;
 use App\Livewire\Attendance\Show as AttendanceShow;
 
+use App\Livewire\Exams\Index as ExamIndex;
+use App\Livewire\Exams\Create as ExamCreate;
+use App\Livewire\Exams\Edit as ExamEdit;
+use App\Livewire\Exams\Show as ExamShow;
+
 Route::get('/', function () {
     $src = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/9196cc7c-5ffc-431c-b338-cf2ba62c9f86/hero_students_school_1788491557685.jpg';
     $destDir = public_path('images');
@@ -113,6 +118,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/attendance/create', AttendanceCreate::class)->name('attendance.create');
         Route::get('/attendance/{attendance}', AttendanceShow::class)->name('attendance.show');
         Route::get('/attendance/{attendance}/edit', AttendanceEdit::class)->name('attendance.edit');
+
+        // Exam Management Routes
+        Route::get('/exams', ExamIndex::class)->name('exams.index');
+        Route::get('/exams/create', ExamCreate::class)->name('exams.create');
+        Route::get('/exams/{exam}', ExamShow::class)->name('exams.show');
+        Route::get('/exams/{exam}/edit', ExamEdit::class)->name('exams.edit');
     });
 
     // Teacher Dashboard

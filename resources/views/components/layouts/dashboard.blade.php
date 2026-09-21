@@ -73,7 +73,10 @@
                         📅 Attendance
                     </a>
 
-                    <a href="#" class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white">
+                    <a
+                        href="{{ Route::has('exams.index') ? route('exams.index') : '#' }}"
+                        class="block px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white"
+                    >
                         📝 Exams
                     </a>
 
